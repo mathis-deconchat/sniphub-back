@@ -3,11 +3,9 @@
 # ------------------------------------------------------
 
 input CreateSnippetInput {
-  categoriesId: Int!
   code_content: String!
   language: String!
   title: String!
-  userId: Int!
 }
 
 """
@@ -23,41 +21,11 @@ type Query {
   snippets: [SnippetsModel!]!
 }
 
-type SnippetsCategoriesModel {
-  createdAt: DateTime!
-  id: String!
-
-  """Example field (placeholder)"""
-  name: Int!
-  snippetId: Int!
-  snippets: [SnippetsModel!]!
-  updatedAt: DateTime!
-}
-
 type SnippetsModel {
-  categories: SnippetsCategoriesModel!
-  categoriesId: Int!
   code_content: String!
   createdAt: DateTime!
   id: String!
   language: String!
   title: String!
-  updatedAt: DateTime!
-  user: UserModel!
-  userId: Int!
-}
-
-type UserModel {
-  createdAt: DateTime!
-
-  """Example field (placeholder)"""
-  email: String!
-  id: String!
-
-  """Example field (placeholder)"""
-  s3Sub: String!
-
-  """Example field (placeholder)"""
-  snippets: [SnippetsModel!]!
   updatedAt: DateTime!
 }

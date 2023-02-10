@@ -15,9 +15,9 @@ export class SnippetsCategoriesService {
 
   findAllSnippetsCategories() {
     return this.prismaService.snippets_categories.findMany({
-      include: {
-        snippets: true,
-      },
+      // include: {
+      //   snippets: true,
+      // },
     });
   }
 

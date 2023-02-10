@@ -11,10 +11,10 @@ export class CreateSnippetInput {
     @Field(() => String)
     language: string;
 
-    @Field(() => Int)
-    userId: number;
+    // @Field(() => Int)
+    // userId: number;
 
-    @Field(() => Int)
-    categoriesId: number;
+    // @Field(() => Int)
+    // categoriesId: number;
 
 }

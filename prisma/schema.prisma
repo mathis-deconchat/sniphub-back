@@ -7,15 +7,15 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model users {
-    id        Int              @id @default(autoincrement())
-    email     String           @unique
-    s3Sub     String           @unique
-    createdAt DateTime         @default(now())
-    updatedAt DateTime         @updatedAt
-    snippets  snippets[]
-    likes     snippets_likes[]
-}
+// model users {
+//     id        Int              @id @default(autoincrement())
+//     email     String           @unique
+//     s3Sub     String           @unique
+//     createdAt DateTime         @default(now())
+//     updatedAt DateTime         @updatedAt
+//     snippets  snippets[]
+//     likes     snippets_likes[]
+// }
 
 model snippets {
     id           Int                 @id @default(autoincrement())
@@ -24,17 +24,17 @@ model snippets {
     language     String
     createdAt    DateTime            @default(now())
     updatedAt    DateTime            @updatedAt
-    userId       Int
-    user         users               @relation(fields: [userId], references: [id])
-    likes        snippets_likes[]
-    categories   snippets_categories @relation(fields: [categoriesId], references: [id])
-    categoriesId Int 
+    // userId       Int
+    // user         users               @relation(fields: [userId], references: [id])
+    // likes        snippets_likes[]
+    // categories   snippets_categories @relation(fields: [categoriesId], references: [id])
+    // categoriesId Int 
 }
 
 model snippets_categories {
     id        Int      @id @default(autoincrement())
     name      String
-    snippets   snippets[]
+    // snippets   snippets[]
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     }
@@ -43,8 +43,8 @@ model snippets_likes {
     id        Int      @id @default(autoincrement())
     snippetId Int
     userId    Int
-    snippet   snippets @relation(fields: [snippetId], references: [id])
-    user      users    @relation(fields: [userId], references: [id])
+    // snippet   snippets @relation(fields: [snippetId], references: [id])
+    // user      users    @relation(fields: [userId], references: [id])
 }
 
 // model tags {

@@ -15,10 +15,10 @@ export class SnippetsService {
 
   async findAllSnippets(){
     let snippets = await this.prismaService.snippets.findMany({
-        include: {
-         categories: true,
-         user: true,
-        }
+        // include: {
+        //  categories: true,
+        //  user: true,
+        // }
     });
     return snippets;
   }

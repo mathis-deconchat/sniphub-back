@@ -14,17 +14,17 @@ export class SnippetsModel extends BaseModel {
     @Field(() => String)
     language: string;
 
-    @Field(() => UserModel)
-    user: UserModel
+    // @Field(() => UserModel)
+    // user: UserModel
 
-    @Field((_type) => Int)
-    userId: number
+    // @Field((_type) => Int)
+    // userId: number
 
-    @Field((_type) => SnippetsCategoriesModel)
-    categories: SnippetsCategoriesModel
+    // @Field((_type) => SnippetsCategoriesModel)
+    // categories: SnippetsCategoriesModel
 
-    @Field((_type) => Int)
-    categoriesId: number
+    // @Field((_type) => Int)
+    // categoriesId: number
 
 
 }
