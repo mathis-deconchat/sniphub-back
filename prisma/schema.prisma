@@ -1,0 +1,69 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model users {
+    id        Int              @id @default(autoincrement())
+    email     String           @unique
+    s3Sub     String           @unique
+    createdAt DateTime         @default(now())
+    updatedAt DateTime         @updatedAt
+    snippets  snippets[]
+    likes     snippets_likes[]
+}
+
+model snippets {
+    id           Int                 @id @default(autoincrement())
+    title        String
+    code_content String
+    language     String
+    createdAt    DateTime            @default(now())
+    updatedAt    DateTime            @updatedAt
+    userId       Int
+    user         users               @relation(fields: [userId], references: [id])
+    likes        snippets_likes[]
+    categories   snippets_categories @relation(fields: [categoriesId], references: [id])
+    categoriesId Int 
+}
+
+model snippets_categories {
+    id        Int      @id @default(autoincrement())
+    name      String
+    snippets   snippets[]
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    }
+
+model snippets_likes {
+    id        Int      @id @default(autoincrement())
+    snippetId Int
+    userId    Int
+    snippet   snippets @relation(fields: [snippetId], references: [id])
+    user      users    @relation(fields: [userId], references: [id])
+}
+
+// model tags {
+//     id        Int      @default(autoincrement()) @id
+//     tag       String   @unique
+//     createdAt DateTime @default(now())
+//     updatedAt DateTime @updatedAt
+//     snippets_tags snippets_tags[]
+//     userId    Int
+
+// }
+
+// model snippets_tags{
+//     id        Int      @default(autoincrement()) @id
+//     createdAt DateTime @default(now())
+//     updatedAt DateTime @updatedAt
+//     tagId     Int
+//     userId    Int
+//     snippetId Int
+//     user     users[]    @relation(fields: [userId], references: [id])
+//     snippet snippets[] @relation(fields: [snippetId], references: [id])
+// }
