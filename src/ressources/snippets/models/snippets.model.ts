@@ -1,30 +1,29 @@
+import { Language } from './../../languages/models/language.model';
 import { SnippetsCategoriesModel } from './../../snippets_categories/models/snippets_categories.model';
-import { UserModel } from './../../users/models/user.model';
 import { BaseModel } from './../../../common/models/base.model';
-import { Field, Int, ObjectType } from "@nestjs/graphql";
+import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Tag } from 'src/ressources/tags/models/tag.models';
 
 @ObjectType()
 export class SnippetsModel extends BaseModel {
-    @Field(() => String)
-    title: string;
+  @Field(() => String)
+  title: string;
 
-    @Field(() => String)
-    code_content: string;
+  @Field(() => String)
+  code_content: string;
 
-    @Field(() => String)
-    language: string;
+  @Field(() => Int)
+  languageId: number;
 
-    // @Field(() => UserModel)
-    // user: UserModel
+  @Field(() => String)
+  description: string;
 
-    // @Field((_type) => Int)
-    // userId: number
+  @Field(() => String)
+  prefix_vscode: string;
 
-    // @Field((_type) => SnippetsCategoriesModel)
-    // categories: SnippetsCategoriesModel
+  @Field(() => [Tag], { nullable: true })
+  tags?: Tag[];
 
-    // @Field((_type) => Int)
-    // categoriesId: number
-
-
+  @Field(() => Language, { nullable: true })
+  language?: Language;
 }

@@ -19,4 +19,14 @@ export class SnippetsResolver {
   findAllSnippets() {
     return this.snippetsService.findAllSnippets();
   }
+
+  @Query(() => [SnippetsModel], { name: 'snippetsByLanguage' })
+  findAllSnippetsByLanguage(@Args('languageId') languageId: number) {
+    return this.snippetsService.findAllSnippetsByLanguage(languageId);
+  }
+
+  @Query(() => SnippetsModel, { name: 'snippet' })
+  getSnippetById(@Args('snippetId') snippetId: number) {
+    return this.snippetsService.getSnippetById(snippetId);
+  }
 }

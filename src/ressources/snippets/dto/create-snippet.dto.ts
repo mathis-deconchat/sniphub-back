@@ -8,13 +8,15 @@ export class CreateSnippetInput {
     @Field(() => String)
     code_content: string;
 
+    @Field(() => Int)
+    languageId: number;
+
     @Field(() => String)
-    language: string;
+    description: string;
 
-    // @Field(() => Int)
-    // userId: number;
+    @Field(() => [Int])
+    tags: number[];
 
-    // @Field(() => Int)
-    // categoriesId: number;
-
+    @Field(() => String, { nullable: true })
+    prefix_vscode?: string;
 }

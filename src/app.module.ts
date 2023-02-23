@@ -7,8 +7,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from 'nestjs-prisma';
 import { SnippetsModule } from './ressources/snippets/snippets.module';
-import { UsersModule } from './ressources/users/users.module';
 import { SnippetsCategoriesModule } from './ressources/snippets_categories/snippets_categories.module';
+import { LanguagesModule } from './ressources/languages/languages.module';
+import { TagsModule } from './ressources/tags/tags.module';
 import config from './common/config/config';
 
 @Module({
@@ -26,8 +27,9 @@ import config from './common/config/config';
       },
     }),
     SnippetsModule,
-    UsersModule,
     SnippetsCategoriesModule,
+    LanguagesModule,
+    TagsModule,
   ],
   controllers: [AppController],
   providers: [AppService, ConfigService],
