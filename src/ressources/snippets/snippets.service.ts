@@ -154,4 +154,14 @@ export class SnippetsService {
     });
     return snippet;
   }
+
+
+
+  remove(id: number) {
+    return this.prismaService.snippets.delete({
+      where: {
+        id: id,
+      },
+    });
+  }
 }

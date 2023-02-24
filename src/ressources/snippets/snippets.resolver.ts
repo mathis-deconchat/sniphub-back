@@ -46,4 +46,9 @@ export class SnippetsResolver {
   ) {
     return this.snippetsService.searchSnippets(search, languageId);
   }
+
+  @Mutation(() => SnippetsModel,{name:"removeSnippet"})
+  removeSnippet(@Args('id', { type: () => Int }) id: number) {
+    return this.snippetsService.remove(id);
+  }
 }
