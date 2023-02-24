@@ -2,6 +2,7 @@ import { CreateSnippetNestInput } from './dto/create-snippet.nest.dto';
 import { CreateSnippetInput } from './dto/create-snippet.dto';
 import { PrismaService } from 'nestjs-prisma';
 import { Injectable } from '@nestjs/common';
+import { UpdateSnippetDto } from './dto/update-snippet.dto';
 
 @Injectable()
 export class SnippetsService {
@@ -16,53 +17,55 @@ export class SnippetsService {
         prefix_vscode: createSnippetInput.prefix_vscode ?? '',
         language: {
           connect: {
-            id: createSnippetInput.languageId
-          }
+            id: createSnippetInput.languageId,
+          },
         },
         tags: {
-          connect: createSnippetInput.tags.map(tag => ({ id: tag }))
+          connect: createSnippetInput.tags.map((tag) => ({ id: tag })),
         },
-      }
+      },
     });
-
   }
 
-  async findAllSnippets(){
+  async updateSnippet(updateSnippetDto: UpdateSnippetDto) {
+    const { ...updateSnippetDto, id } = updateSnippetDto;
+    return await this.prismaService.snippets.create({
+      data: { updateSnippetDto },
+    });
+  }
+
+  async findAllSnippets() {
     let snippets = await this.prismaService.snippets.findMany({
       include: {
         language: true,
         tags: true,
-      }
-
+      },
     });
     return snippets;
   }
 
-
-  async findAllSnippetsByLanguage(languageId: number){
+  async findAllSnippetsByLanguage(languageId: number) {
     let snippets = await this.prismaService.snippets.findMany({
       where: {
-        languageId: languageId
+        languageId: languageId,
       },
       include: {
         language: true,
         tags: true,
-      }
-
+      },
     });
     return snippets;
   }
 
-  async getSnippetById(id: number){
+  async getSnippetById(id: number) {
     let snippet = await this.prismaService.snippets.findUnique({
       where: {
-        id: id
+        id: id,
       },
       include: {
         language: true,
         tags: true,
-      }
-
+      },
     });
     return snippet;
   }
