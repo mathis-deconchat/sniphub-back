@@ -1,3 +1,4 @@
+import { UpdateSnippetDto } from './dto/update-snippet.dto';
 import { CreateSnippetInput } from './dto/create-snippet.dto';
 import { SnippetsModel } from './models/snippets.model';
 import { Args, Mutation, Resolver, Query } from '@nestjs/graphql';
@@ -15,6 +16,14 @@ export class SnippetsResolver {
     return await this.snippetsService.createSnippet(createSnippetInput);
   }
 
+  @Mutation(() => SnippetsModel, { name: 'updateSnippet' })
+  async updateSnippet(
+    @Args('updateSnippetInput') updateSnippetInput: UpdateSnippetDto,
+    @Args('snippetId') snippetId: number,
+  ) {
+    return await this.snippetsService.updateSnippet(updateSnippetInput, snippetId);
+  }
+
   @Query(() => [SnippetsModel], { name: 'snippets' })
   findAllSnippets() {
     return this.snippetsService.findAllSnippets();
@@ -28,5 +37,13 @@ export class SnippetsResolver {
   @Query(() => SnippetsModel, { name: 'snippet' })
   getSnippetById(@Args('snippetId') snippetId: number) {
     return this.snippetsService.getSnippetById(snippetId);
+  }
+
+  @Query(() => [SnippetsModel], { name: 'searchSnippets' })
+  searchSnippets(
+    @Args('search') search: string,
+    @Args('languageId') languageId: number,
+  ) {
+    return this.snippetsService.searchSnippets(search, languageId);
   }
 }

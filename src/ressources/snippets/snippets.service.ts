@@ -1,3 +1,5 @@
+import { UpdateLanguageInput } from './../languages/dto/update-language.input';
+import { Language } from './../languages/models/language.model';
 import { CreateSnippetNestInput } from './dto/create-snippet.nest.dto';
 import { CreateSnippetInput } from './dto/create-snippet.dto';
 import { PrismaService } from 'nestjs-prisma';
@@ -27,12 +29,95 @@ export class SnippetsService {
     });
   }
 
-  async updateSnippet(updateSnippetDto: UpdateSnippetDto) {
-    const { ...updateSnippetDto, id } = updateSnippetDto;
-    return await this.prismaService.snippets.create({
-      data: { updateSnippetDto },
+  async searchSnippets(search: string, languageId: number) {
+    let snippets = await this.prismaService.snippets.findMany({
+      where: {
+        OR: [
+          {
+            title: {
+              contains: search,
+              mode: 'insensitive',
+            },
+          },
+          {
+            description: {
+              contains: search,
+              mode: 'insensitive',
+            },
+          },
+          {
+            code_content: {
+              contains: search,
+              mode: 'insensitive',
+            },
+          },
+        ],
+        languageId: languageId,
+      },
+      include: {
+        language: true,
+        tags: true,
+      },
     });
+    return snippets;
   }
+
+  async updateSnippet(update: UpdateSnippetDto, snippetId: number){
+    console.log(update)
+    let t = {}
+    if(!(update.tags)) {
+      t = undefined;
+    } else {
+       t = {
+        tags: {
+          connect: update.tags.map((tag) => ({ id: tag })) || undefined,
+        }
+      }
+    }
+
+    if(!(update.languageId)) {
+      t = {
+        ...t,
+        language: undefined
+      }
+    } else {
+      t = {
+        ...t,
+        language: {
+          connect: {
+            id: update.languageId || undefined,
+          },
+        }
+      }
+    }
+
+    return await this.prismaService.snippets.update({
+      where: {
+        id: snippetId
+      },
+      data: {
+        title: update.title || undefined,
+        code_content: update.code_content || undefined,
+        description: update.description || undefined,
+        prefix_vscode: update.prefix_vscode || undefined,
+        language: {
+          connect: {
+            id: update.languageId || undefined,
+          },
+        },
+        ...t
+
+        },
+    })
+  }
+
+
+  // async updateSnippet(updateSnippetDto: UpdateSnippetDto) {
+  //   const { ...updateSnippetDto, id } = updateSnippetDto;
+  //   return await this.prismaService.snippets.create({
+  //     data: { updateSnippetDto },
+  //   });
+  // }
 
   async findAllSnippets() {
     let snippets = await this.prismaService.snippets.findMany({

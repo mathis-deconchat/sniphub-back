@@ -61,11 +61,13 @@ type Mutation {
   createSnippet(createSnippetInput: CreateSnippetInput!): SnippetsModel!
   createTag(createTagInput: CreateTagInput!): Tag!
   removeTag(id: Int!): Tag!
+  updateSnippet(snippetId: Int!, updateSnippetInput: UpdateSnippetDto!): SnippetsModel!
   updateTag(updateTagInput: UpdateTagInput!): Tag!
 }
 
 type Query {
   languages: [Language!]!
+  searchSnippets(languageId: Int!, search: String!): [SnippetsModel!]!
   snippet(snippetId: Int!): SnippetsModel!
   snippets: [SnippetsModel!]!
   snippetsByLanguage(languageId: Int!): [SnippetsModel!]!
@@ -99,6 +101,15 @@ type Tag {
   """Example field (placeholder)"""
   snippets: [SnippetsModel!]
   updatedAt: DateTime!
+}
+
+input UpdateSnippetDto {
+  code_content: String
+  description: String
+  languageId: Int
+  prefix_vscode: String
+  tags: [Int!]
+  title: String
 }
 
 input UpdateTagInput {
