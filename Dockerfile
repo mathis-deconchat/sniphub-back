@@ -16,13 +16,13 @@ COPY --chown=nodeuser:nodegroup tsconfig.json ./
 # Copy source code
 COPY --chown=nodeuser:nodegroup . .
 
-USER nodeuser
 
-RUN npm ci --production
+RUN npm i
 ARG DATABASE_URL
 ENV DATABASE_URL $DATABASE_URL
 RUN npx prisma generate
 
 EXPOSE 4000 
+USER nodeuser
 
 CMD npm run start:prod
