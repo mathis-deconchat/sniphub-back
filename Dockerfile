@@ -21,7 +21,7 @@ RUN npm i
 ARG DATABASE_URL
 ENV DATABASE_URL $DATABASE_URL
 RUN npx prisma generate
-RUN npm run bulid
+RUN npm run build
 
 EXPOSE 4000 
 USER nodeuser
