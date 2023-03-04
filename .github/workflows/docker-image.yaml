@@ -12,7 +12,7 @@ jobs:
     services:
 
       db:
-        image: registry.digitalocean.com/docker-cours/sniphub-kubectl:github-0.1
+        image: mat31/sniphub-kubectl
         env:
           KUBECONFIG: "${{ secrets.KUBECONFIG }}"
           NAMESPACE: sniphub
