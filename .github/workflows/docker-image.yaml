@@ -20,8 +20,7 @@ jobs:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
       - name: Log in to DO Container Registry 
-        run: doctl registry login --expiry-seconds 600         
-
+        run: doctl registry login --expiry-seconds 600  
 
       - name: print
         env: 
@@ -67,5 +66,3 @@ jobs:
           NAMESPACE: sniphub
           POD: postgres-statefulset-0
           PORTS: 5432:5432  
-        ports:
-          - 5432:5432
