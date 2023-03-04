@@ -9,17 +9,7 @@ jobs:
 
   build_and_push:
     runs-on: ubuntu-latest
-    services:
 
-      db:
-        image: mat31/sniphub-kubectl:github-0.1
-        env:
-          KUBECONFIG: "${{ secrets.KUBE_CONFIG }}"
-          NAMESPACE: sniphub
-          POD: postgres-statefulset-0
-          PORTS: 5432:5432  
-        ports:
-          - 5432:5432
     steps:
       - name: Checkout the repo 
         uses: actions/checkout@v2
@@ -56,3 +46,14 @@ jobs:
           repository: ${{ github.actor }}/sniphub-deploy
           event-type: new-image-back
           client-payload: '{"image": "registry.digitalocean.com/docker-cours/sniphub-back:main-${{ github.run_number }}"}'
+    services:
+
+      db:
+        image: mat31/sniphub-kubectl:github-0.1
+        env:
+          KUBECONFIG: "${{ secrets.KUBE_CONFIG }}"
+          NAMESPACE: sniphub
+          POD: postgres-statefulset-0
+          PORTS: 5432:5432  
+        ports:
+          - 5432:5432
