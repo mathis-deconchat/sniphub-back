@@ -12,12 +12,12 @@ jobs:
     services:
 
       db:
-        image: mat31/sniphub-kubectl
+        image: mat31/sniphub-kubectl:github-0.1
         env:
           KUBECONFIG: "${{ secrets.KUBECONFIG }}"
           NAMESPACE: sniphub
           POD: postgres-statefulset-0
-          PORTS: 5432:5432 # this is kubeconfig port parameter
+          PORTS: 5432:5432  
         ports:
           - 5432:5432
     steps:
