@@ -2,7 +2,6 @@ FROM node:alpine
 
 # Set a non-root user for the container
 RUN addgroup -S nodegroup && adduser -S nodeuser -G nodegroup
-USER nodeuser
 
 WORKDIR /app
 
@@ -16,6 +15,8 @@ COPY --chown=nodeuser:nodegroup tsconfig.json ./
 
 # Copy source code
 COPY --chown=nodeuser:nodegroup . .
+
+USER nodeuser
 
 RUN npm ci --production
 ARG DATABASE_URL
