@@ -28,6 +28,18 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: echo $DATABASE_URL
 
+
+      - name: postgres
+        env: 
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: sudo lsof -i:5432
+
+
+      - name: print
+        env: 
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: echo $DATABASE_URL
+
       - name: Build image 
         env: 
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
