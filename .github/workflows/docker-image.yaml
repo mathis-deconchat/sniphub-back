@@ -35,7 +35,7 @@ jobs:
 
       - name: print
         env: 
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_URL: aaaaa
         run: echo $DATABASE_URL
 
       - name: Build image 
