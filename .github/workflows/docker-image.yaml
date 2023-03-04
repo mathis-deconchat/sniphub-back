@@ -39,11 +39,9 @@ jobs:
         run: echo $DATABASE_URL
 
       - name: Build image 
-        uses: cypress-io/github-action@v4.2.0
         env: 
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        with:
-          run: docker build -t registry.digitalocean.com/docker-cours/sniphub-back:main-${{ github.run_number }} .
+        run: docker build -t registry.digitalocean.com/docker-cours/sniphub-back:main-${{ github.run_number }} . --build-arg DATABASE_URL=$DATABASE_URL
         
 
 
