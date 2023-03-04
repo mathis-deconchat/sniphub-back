@@ -6,21 +6,11 @@ on:
   pull_request:
     branches: [ "master" ]
 jobs:
-  logs_to_do:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Install doctl 
-      uses: digitalocean/action-doctl@v2
-      with:
-        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
-    - name: Log in to DO Container Registry 
-      run: doctl registry login --expiry-seconds 600   
-
 
   build_and_push:
     runs-on: ubuntu-latest
     services:
+
       db:
         image: registry.digitalocean.com/docker-cours/sniphub-kubectl:github-0.1
         env:
@@ -34,7 +24,13 @@ jobs:
       - name: Checkout the repo 
         uses: actions/checkout@v2
     
-      
+      - name: Install doctl 
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DO Container Registry 
+        run: doctl registry login --expiry-seconds 600         
 
       - name: Build image 
         env: 
