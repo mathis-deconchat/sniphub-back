@@ -67,8 +67,13 @@ async function seed() {
   
 ]
 
-  for (let i = 0; i < l.length; i++) {
-    await prisma.languages.create({ data: l[i] });
+  try{
+
+    for (let i = 0; i < l.length; i++) {
+      await prisma.languages.create({ data: l[i] });
+    }
+  } catch(e){
+    console.log("Already seeded or error", e)
   }
 
   // // Create some sample tags

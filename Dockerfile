@@ -21,6 +21,8 @@ RUN npm i
 ARG DATABASE_URL
 ENV DATABASE_URL $DATABASE_URL
 RUN npx prisma generate
+RUN npx prisma migrate deploy --preview-feature --force --create-db --name automatic-seed
+RUN npx prisma db seed
 RUN npm run format
 RUN npm run build
 
