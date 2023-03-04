@@ -1,7 +1,7 @@
 import { UpdateSnippetDto } from './dto/update-snippet.dto';
 import { CreateSnippetInput } from './dto/create-snippet.dto';
 import { SnippetsModel } from './models/snippets.model';
-import { Args, Mutation, Resolver, Query } from '@nestjs/graphql';
+import { Args, Mutation, Resolver, Query, Int } from '@nestjs/graphql';
 import { SnippetsService } from './snippets.service';
 
 @Resolver()
@@ -48,7 +48,7 @@ export class SnippetsResolver {
   }
 
   @Mutation(() => SnippetsModel,{name:"removeSnippet"})
-  removeSnippet(@Args('id', { type: () => Int }) id: number) {
+  removeSnippet(@Args('id', { type: () => Int}) id: number) {
     return this.snippetsService.remove(id);
   }
 }

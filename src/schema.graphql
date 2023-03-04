@@ -60,6 +60,7 @@ type Mutation {
   createLanguage(createLanguageInput: CreateLanguageInput!): Language!
   createSnippet(createSnippetInput: CreateSnippetInput!): SnippetsModel!
   createTag(createTagInput: CreateTagInput!): Tag!
+  removeSnippet(id: Int!): SnippetsModel!
   removeTag(id: Int!): Tag!
   updateSnippet(snippetId: Int!, updateSnippetInput: UpdateSnippetDto!): SnippetsModel!
   updateTag(updateTagInput: UpdateTagInput!): Tag!
