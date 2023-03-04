@@ -31,7 +31,7 @@ jobs:
       - name: postgres
         env: 
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: sudo lsof -i:5432
+        run: ping db
 
 
       - name: print
