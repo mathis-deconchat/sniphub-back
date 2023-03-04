@@ -26,7 +26,17 @@ import config from './common/config/config';
 
     PrismaModule.forRoot({
       isGlobal: true,
+
       prismaServiceOptions: {
+        explicitConnect: true,
+        prismaOptions: {
+          datasources: {
+            db: {
+              url: process.env.DATABASE_URL,
+            },
+          },
+        },
+
         //middlewares: [loggingMiddleware(new Logger('PrismaMiddleware'))], // Implements logging middleware
       },
     }),

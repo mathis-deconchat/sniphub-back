@@ -32,6 +32,12 @@ jobs:
       - name: Log in to DO Container Registry 
         run: doctl registry login --expiry-seconds 600         
 
+
+      - name: print
+        env: 
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: echo $DATABASE_URL
+
       - name: Build image 
         env: 
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
