@@ -22,14 +22,12 @@ export class GqlConfigService implements GqlOptionsFactory {
 
       context: ({ req }) => ({ req }),
       subscriptions: {
-        'subscriptions-transport-ws' : {
+        'subscriptions-transport-ws': {
           onConnect: (connectionParams, webSocket, context) => {
             // console.log('onConnect', connectionParams);
-          }
-
-        }
-      }
-    
+          },
+        },
+      },
     };
   }
 }

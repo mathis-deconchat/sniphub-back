@@ -10,7 +10,9 @@ describe('SnippetsCategoriesResolver', () => {
       providers: [SnippetsCategoriesResolver, SnippetsCategoriesService],
     }).compile();
 
-    resolver = module.get<SnippetsCategoriesResolver>(SnippetsCategoriesResolver);
+    resolver = module.get<SnippetsCategoriesResolver>(
+      SnippetsCategoriesResolver,
+    );
   });
 
   it('should be defined', () => {

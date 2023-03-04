@@ -21,7 +21,10 @@ export class SnippetsResolver {
     @Args('updateSnippetInput') updateSnippetInput: UpdateSnippetDto,
     @Args('snippetId') snippetId: number,
   ) {
-    return await this.snippetsService.updateSnippet(updateSnippetInput, snippetId);
+    return await this.snippetsService.updateSnippet(
+      updateSnippetInput,
+      snippetId,
+    );
   }
 
   @Query(() => [SnippetsModel], { name: 'snippets' })
@@ -47,8 +50,8 @@ export class SnippetsResolver {
     return this.snippetsService.searchSnippets(search, languageId);
   }
 
-  @Mutation(() => SnippetsModel,{name:"removeSnippet"})
-  removeSnippet(@Args('id', { type: () => Int}) id: number) {
+  @Mutation(() => SnippetsModel, { name: 'removeSnippet' })
+  removeSnippet(@Args('id', { type: () => Int }) id: number) {
     return this.snippetsService.remove(id);
   }
 }

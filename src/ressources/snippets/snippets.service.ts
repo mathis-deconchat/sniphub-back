@@ -62,24 +62,24 @@ export class SnippetsService {
     return snippets;
   }
 
-  async updateSnippet(update: UpdateSnippetDto, snippetId: number){
-    console.log(update)
-    let t = {}
-    if(!(update.tags)) {
+  async updateSnippet(update: UpdateSnippetDto, snippetId: number) {
+    console.log(update);
+    let t = {};
+    if (!update.tags) {
       t = undefined;
     } else {
-       t = {
+      t = {
         tags: {
           connect: update.tags.map((tag) => ({ id: tag })) || undefined,
-        }
-      }
+        },
+      };
     }
 
-    if(!(update.languageId)) {
+    if (!update.languageId) {
       t = {
         ...t,
-        language: undefined
-      }
+        language: undefined,
+      };
     } else {
       t = {
         ...t,
@@ -87,13 +87,13 @@ export class SnippetsService {
           connect: {
             id: update.languageId || undefined,
           },
-        }
-      }
+        },
+      };
     }
 
     return await this.prismaService.snippets.update({
       where: {
-        id: snippetId
+        id: snippetId,
       },
       data: {
         title: update.title || undefined,
@@ -105,12 +105,10 @@ export class SnippetsService {
             id: update.languageId || undefined,
           },
         },
-        ...t
-
-        },
-    })
+        ...t,
+      },
+    });
   }
-
 
   // async updateSnippet(updateSnippetDto: UpdateSnippetDto) {
   //   const { ...updateSnippetDto, id } = updateSnippetDto;
@@ -154,8 +152,6 @@ export class SnippetsService {
     });
     return snippet;
   }
-
-
 
   remove(id: number) {
     return this.prismaService.snippets.delete({

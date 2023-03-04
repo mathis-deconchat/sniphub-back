@@ -16,8 +16,8 @@ export class TagsService {
         snippets: true,
       },
     });
-    if(tag) return {...tag, numberOfSnippets: tag.snippets.length};
-    
+    if (tag) return { ...tag, numberOfSnippets: tag.snippets.length };
+
     return await this.prismaService.tags.create({
       data: createTagInput,
     });

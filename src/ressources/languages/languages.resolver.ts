@@ -8,16 +8,15 @@ import { UpdateLanguageInput } from './dto/update-language.input';
 export class LanguagesResolver {
   constructor(private readonly languagesService: LanguagesService) {}
 
-
   @Query(() => [Language], { name: 'languages' })
   findAll() {
     return this.languagesService.findAll();
   }
 
   @Mutation(() => Language)
-  createLanguage(@Args('createLanguageInput') createLanguageInput: CreateLanguageInput) {
+  createLanguage(
+    @Args('createLanguageInput') createLanguageInput: CreateLanguageInput,
+  ) {
     return this.languagesService.create(createLanguageInput);
   }
-
-
 }

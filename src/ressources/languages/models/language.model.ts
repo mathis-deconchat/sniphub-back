@@ -10,12 +10,15 @@ export class Language extends BaseModel {
   @Field(() => String, { description: 'Reference icon for front' })
   iconName: string;
 
-  @Field(() => SnippetsModel, { description: 'Language description', nullable: true})
+  @Field(() => SnippetsModel, {
+    description: 'Language description',
+    nullable: true,
+  })
   snippets?: SnippetsModel[];
 
   @Field(() => Int, { description: 'Language id' })
   numberOfSnippets: number;
 
-  @Field(() => String, { description: 'Language description', nullable: true})
+  @Field(() => String, { description: 'Language description', nullable: true })
   prismLanguage: string;
 }

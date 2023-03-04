@@ -24,9 +24,9 @@ export class LanguagesService {
       return {
         ...language,
         numberOfSnippets: language.snippets.length,
-    }})
+      };
+    });
   }
-
 
   findOne(id: number) {
     return `This action returns a #${id} language`;

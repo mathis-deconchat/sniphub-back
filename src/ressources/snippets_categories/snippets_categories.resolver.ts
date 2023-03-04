@@ -2,10 +2,11 @@ import { SnippetsCategoriesModel } from './models/snippets_categories.model';
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { SnippetsCategoriesService } from './snippets_categories.service';
 
-
 @Resolver(() => SnippetsCategoriesModel)
 export class SnippetsCategoriesResolver {
-  constructor(private readonly snippetsCategoriesService: SnippetsCategoriesService) {}
+  constructor(
+    private readonly snippetsCategoriesService: SnippetsCategoriesService,
+  ) {}
 
   // @Mutation(() => SnippetsCategory)
   // createSnippetsCategory(@Args('createSnippetsCategoryInput') createSnippetsCategoryInput: CreateSnippetsCategoryInput) {

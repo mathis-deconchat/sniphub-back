@@ -16,9 +16,13 @@ import config from './common/config/config';
   imports: [
     GraphQLModule.forRootAsync<ApolloDriverConfig>({
       driver: ApolloDriver,
-      useClass: GqlConfigService,      
+      useClass: GqlConfigService,
     }),
-    ConfigModule.forRoot({ isGlobal: true, load: [config], envFilePath: '.env' }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [config],
+      envFilePath: '.env',
+    }),
 
     PrismaModule.forRoot({
       isGlobal: true,

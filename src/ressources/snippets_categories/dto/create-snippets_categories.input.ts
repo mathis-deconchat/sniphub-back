@@ -4,5 +4,4 @@ import { InputType, Int, Field } from '@nestjs/graphql';
 export class CreateSnippetsCategoriesInput {
   @Field(() => String, { description: 'Example field (placeholder)' })
   name: string;
-
 }

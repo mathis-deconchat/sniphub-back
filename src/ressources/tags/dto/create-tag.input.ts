@@ -5,6 +5,9 @@ export class CreateTagInput {
   @Field(() => String, { description: 'Example field (placeholder)' })
   name: string;
 
-  @Field(() => Int, { description: 'Example field (placeholder)', nullable: true })
+  @Field(() => Int, {
+    description: 'Example field (placeholder)',
+    nullable: true,
+  })
   snippetId?: number;
 }

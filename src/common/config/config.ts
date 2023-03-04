@@ -1,4 +1,4 @@
- const config = {
+const config = {
   nest: { port: 3000 },
   cors: { enabled: true },
   graphql: {

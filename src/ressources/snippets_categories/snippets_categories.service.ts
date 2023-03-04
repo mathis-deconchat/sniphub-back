@@ -25,7 +25,10 @@ export class SnippetsCategoriesService {
     return `This action returns a #${id} snippetsCategory`;
   }
 
-  update(id: number, updateSnippetsCategoryInput: UpdateSnippetsCategoriesInput) {
+  update(
+    id: number,
+    updateSnippetsCategoryInput: UpdateSnippetsCategoriesInput,
+  ) {
     return `This action updates a #${id} snippetsCategory`;
   }
 
