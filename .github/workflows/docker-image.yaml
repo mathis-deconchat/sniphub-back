@@ -40,7 +40,7 @@ jobs:
 
       - name: Build image 
         env: 
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_URL: aaaa
         run: docker build -t registry.digitalocean.com/docker-cours/sniphub-back:main-${{ github.run_number }} .
 
 
