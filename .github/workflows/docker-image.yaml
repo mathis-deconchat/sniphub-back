@@ -25,10 +25,10 @@ jobs:
       - name: Build image 
         env: 
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: docker build -t registry.digitalocean.com/docker-cours/sniphub-back:main-${{ github.run_number }} . --build-arg DATABASE_URL=$DATABASE_URL
+        run: docker build -t registry.digitalocean.com/docker-cours/sniphub-back:main-${{ github.sha }} . --build-arg DATABASE_URL=$DATABASE_URL
 
       - name: Push image to DO Container Registry 
-        run: docker push registry.digitalocean.com/docker-cours/sniphub-back:main-${{ github.run_number }}
+        run: docker push registry.digitalocean.com/docker-cours/sniphub-back:main-${{ github.sha }}
 
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v1
@@ -36,9 +36,14 @@ jobs:
           token: ${{ secrets.PAT }}
           repository: ${{ github.actor }}/sniphub-deploy
           event-type: new-image-back
-          client-payload: '{"image": "registry.digitalocean.com/docker-cours/sniphub-back:main-${{ github.run_number }}"}'
-          
-      - name: Scan for vulnerabilities
-        uses: crazy-max/ghaction-container-scan@v2
+          client-payload: '{"image": "registry.digitalocean.com/docker-cours/sniphub-back:main-${{ github.sha }}"}'
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
         with:
-          image: registry.digitalocean.com/docker-cours/sniphub-back:main-${{ github.run_number }}
+          image-ref: registry.digitalocean.com/docker-cours/sniphub-back:main-${{ github.sha }}
+          format: 'table'
+          exit-code: '0'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
