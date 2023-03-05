@@ -37,6 +37,7 @@ jobs:
           repository: ${{ github.actor }}/sniphub-deploy
           event-type: new-image-back
           client-payload: '{"image": "registry.digitalocean.com/docker-cours/sniphub-back:main-${{ github.run_number }}"}'
+          
       - name: Scan for vulnerabilities
         uses: crazy-max/ghaction-container-scan@v2
         with:

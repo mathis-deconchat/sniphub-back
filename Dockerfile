@@ -1,4 +1,4 @@
-FROM registry.digitalocean.com/docker-cours/node-18-bulleyes:1.0
+FROM registry.digitalocean.com/docker-cours/node-19.7-bullseyes-slim:1.0
 
 # Set a non-root user for the container
 
