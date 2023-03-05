@@ -22,23 +22,6 @@ jobs:
       - name: Log in to DO Container Registry 
         run: doctl registry login --expiry-seconds 600  
 
-      - name: print
-        env: 
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: echo $DATABASE_URL
-
-
-      - name: postgres
-        env: 
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: ping db
-
-
-      - name: print
-        env: 
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: echo $DATABASE_URL
-
       - name: Build image 
         env: 
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
@@ -54,14 +37,3 @@ jobs:
           repository: ${{ github.actor }}/sniphub-deploy
           event-type: new-image-back
           client-payload: '{"image": "registry.digitalocean.com/docker-cours/sniphub-back:main-${{ github.run_number }}"}'
-
-    services:
-      db:
-        image: mat31/sniphub-kubectl:github-0.1
-        env:
-          KUBECONFIG: "${{ secrets.KUBE_CONFIG }}"
-          NAMESPACE: sniphub
-          POD: postgres-statefulset-0
-          PORTS: '5432:5432'  
-        ports:
-          - '5432:5432'
