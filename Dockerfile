@@ -1,4 +1,4 @@
-FROM registry.digitalocean.com/docker-cours/node-18-alpine:1.0
+FROM registry.digitalocean.com/docker-cours/node-18-alpine:2.0
 
 # Set a non-root user for the container
 
