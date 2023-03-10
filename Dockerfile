@@ -1,18 +1,14 @@
-FROM registry.digitalocean.com/docker-cours/node-18-alpine:2.0
+FROM registry.digitalocean.com/docker-cours/private-original-images:node-18-alpine_1
 
-# Set a non-root user for the container
 
 WORKDIR /app
 
-# Copy package.json and package-lock.json files
 COPY --chown=node:node package*.json ./
 
-# generated prisma files
 COPY --chown=node:node prisma ./prisma/
 
 COPY --chown=node:node tsconfig.json ./
 
-# Copy source code
 COPY --chown=node:node . .
 
 
@@ -21,7 +17,6 @@ RUN npm i
 RUN npx prisma generate
 
 RUN npm run format
-RUN npm run build
 
 EXPOSE 4000 
 USER node
