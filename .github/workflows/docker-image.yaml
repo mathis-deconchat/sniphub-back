@@ -30,14 +30,6 @@ jobs:
       - name: Push image to DO Container Registry 
         run: docker push registry.digitalocean.com/docker-cours/sniphub-back:main-${{ github.sha }}
 
-      - name: Repository Dispatch
-        uses: peter-evans/repository-dispatch@v1
-        with:
-          token: ${{ secrets.PAT }}
-          repository: ${{ github.actor }}/sniphub-deploy
-          event-type: new-image-back
-          client-payload: '{"image": "registry.digitalocean.com/docker-cours/sniphub-back:main-${{ github.sha }}"}'
-
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
@@ -54,3 +46,11 @@ jobs:
         if: always()
         with:
           sarif_file: 'trivy-results.sarif'
+
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.PAT }}
+          repository: ${{ github.actor }}/sniphub-deploy
+          event-type: new-image-back
+          client-payload: '{"image": "registry.digitalocean.com/docker-cours/sniphub-back:main-${{ github.sha }}"}'
